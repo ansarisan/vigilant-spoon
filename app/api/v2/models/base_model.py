@@ -1,4 +1,3 @@
-# These 4 list store data for users, meetups, questions & rsvps respectively
 from .... db_con import init_db
 from flask import current_app
 
@@ -61,48 +60,6 @@ class BaseModels(object):
 
         except Exception:
             return "Not Found"
-
-    def check_item_exists(self, key, item, database):
-        """ 
-        This method accepts a key e.g username
-        an item e.g 'Leewel' and
-        a database e.g users 
-        """
-        # if database = user ... try check for with 'index of where it is found'
-
-        # Confirm if all databases store in a similar structure
-
-        # example for user
-
-        try:
-            data = [record for record in database if record[key].lower()
-                    == item.lower()]
-        except:
-            data = [record for record in database if record[key] == int(item)]
-        if not data:
-            return "{} not found".format(key)
-
-        return data
-
-    def check_item_return_index(self, key, item, database):
-        """ 
-        This method accepts a key e.g username, an item which is being 
-        checked for e.g 'Leewel' and a database to search for the item
-        e.g users
-        """
-
-        try:
-            data = [[ind, record] for [ind, record] in enumerate(
-                database) if record[key].lower() == item.lower()]
-
-        except:
-            data = [[ind, record] for [ind, record] in enumerate(
-                database) if record[key] == int(item)]
-
-        if not data:
-            return "{} not found".format(key)
-
-        return data
 
     def check_missing_details(self, details):
         """ 

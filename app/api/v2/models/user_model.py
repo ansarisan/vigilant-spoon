@@ -57,10 +57,10 @@ class UserModels(BaseModels):
     def get_username_by_id(self, user_id):
         """ returns a username given the id """
 
-        try:            
+        try:
             cur = self.db.cursor()
             cur.execute(
-                """ SELECT username FROM users WHERE user_id = %d;""" % (user_id))
+                """ SELECT username FROM users WHERE user_id = {};""".format(user_id))
             data = cur.fetchone()
             cur.close()
 
@@ -68,7 +68,6 @@ class UserModels(BaseModels):
 
         except Exception:
             return "Not Found"
-
 
     def check_exists(self, username):
         """ Checks if the record exists """
@@ -116,7 +115,6 @@ class UserModels(BaseModels):
         user_id = cur.fetchone()[0]
         database.commit()
         cur.close()
-       
 
         resp = {
             "id": user_id,
