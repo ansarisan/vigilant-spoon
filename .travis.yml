@@ -15,10 +15,18 @@ services:
   - postgresql
 
 addons:
-  postgresql: "10.6"
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+env:
+  global:
+  - PGPORT=5432
 
 before_script:
-  - psql -c 'CREATE DATABASE questioner;' -U postgres
+
+  - psql -c 'create database questioner;' -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to postgres ;" -U postgres
 
 script:
